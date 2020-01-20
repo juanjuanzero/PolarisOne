@@ -1,0 +1,44 @@
+﻿@page "/tacticscards"
+
+@using PolarisOneWeb.Data.DataInterfaces;
+@using PolarisOneWeb.Models;
+@using PolarisOneWeb.Components;
+
+@inject ITacticData tacticDataService
+
+<div class="container">
+    <h3>Tactics</h3>
+    <div class="card-columns">
+        @if (TacticList == null || !TacticList.Any())
+        {
+            <span>Loading Tactics...</span>
+        }
+        else
+        {
+            @foreach (var tactic in TacticList)
+            {
+                var a = string.Join(", ", tactic.DoneOnDayOfWeeks.Select(t => t.ToString()));
+                <BootstrapCard Title="@tactic.TacticCommit"
+                               SubTitle="@("Strategy: " + tactic.TacticStrategy.StrategyTitle)"
+                               Description="@tactic.TacticDescription"
+                               >
+                    <DetailFrag>
+                        <div><label>Executed On: </label> <span>@a</span></div>
+                        <div><label>Start: </label> <span>@tactic.TacticStart?.ToShortDateString()</span></div>
+                        <div><label>End: </label> <span>@tactic.TacticEnd?.ToShortDateString()</span></div>
+                    </DetailFrag>
+                </BootstrapCard>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    public IEnumerable<Tactic> TacticList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000 * 10);
+        TacticList = tacticDataService.GetTactics();
+    }
+}

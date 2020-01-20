@@ -1,0 +1,30 @@
+﻿
+
+    <div class="card">
+        <div class="card-header">
+            <h5>@Title</h5>
+            <small>@SubTitle</small>
+        </div>
+        <div class="card-body">
+            <p class="card-text">@Description</p>
+            <div>@DetailFrag</div>
+        </div>
+        @if (!string.IsNullOrWhiteSpace(Link))
+        {
+            <div class="card-footer">
+                <a href="@Link" class="card-link">@LinkText</a>
+            </div>
+        }
+    </div>
+
+
+
+@code {
+    [Parameter] public string Title { get; set; }
+    [Parameter] public string SubTitle { get; set; }
+    [Parameter] public string Description { get; set; }
+    [Parameter] public string LinkText { get; set; }
+    [Parameter] public string Link { get; set;  }
+    [Parameter] public RenderFragment DetailFrag { get; set; }
+    //https://docs.microsoft.com/en-us/aspnet/core/blazor/components?view=aspnetcore-3.1#templated-components
+}

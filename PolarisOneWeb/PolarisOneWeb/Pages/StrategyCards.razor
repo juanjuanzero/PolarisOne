@@ -1,0 +1,35 @@
+﻿@page "/strategycards"
+
+@using PolarisOneWeb.Data.DataInterfaces;
+@using PolarisOneWeb.Models;
+@using PolarisOneWeb.Components;
+
+@inject IStrategyData strategyDataService
+
+<div class="container">
+    <h3>Strategies</h3>
+    <div class="card-columns">
+        @if (StrategyList == null || !StrategyList.Any())
+        {
+            <span>Loading Elements...</span>
+        }
+        else
+        {
+            @foreach (var strategy in StrategyList)
+            {
+                <BootstrapCard Title="@strategy.StrategyTitle"
+                               Description="@strategy.StrategyDescription"></BootstrapCard>
+            }
+        }
+    </div>
+</div>
+
+@code {
+    public IEnumerable<Strategy> StrategyList { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        await Task.Delay(1000 * 10);
+        StrategyList = strategyDataService.GetStrategies();
+    }
+}

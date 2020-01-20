@@ -1,0 +1,2 @@
+ToDo
+- Create the weekly check in visual, should have wells and each tactic should be able to be displayed within the day of the week it should be there.
