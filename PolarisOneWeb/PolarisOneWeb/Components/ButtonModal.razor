@@ -1,0 +1,22 @@
+﻿
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#targetModal" @onclick="ToggleShow">
+    @ButtonText
+</button>
+
+<div class="modal fade @(IsShown? "show":"")" id="targetModal" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        @ModalContent
+    </div>
+</div>
+
+@code {
+    [Parameter] public string ButtonText { get; set; }
+    [Parameter] public RenderFragment ModalContent { get; set; }
+
+    private bool IsShown { get; set; }
+
+    private void ToggleShow()
+    {
+        IsShown = !IsShown;
+    }
+}

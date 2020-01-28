@@ -75,6 +75,18 @@ namespace PolarisOneWeb.Data
                     DoneOnDayOfWeeks = new List<DayOfWeek>(){ DayOfWeek.Monday, DayOfWeek.Tuesday, DayOfWeek.Thursday},
                     IsImportant = true,
                     TacticStrategy = StrategiesDb.GetStrategy(3)
+                },
+                new Tactic
+                {
+                    TacticId = 6,
+                    TacticCommit = "I will relax.",
+                    TacticDescription = "Every Sunday night spend time to relax",
+                    TacticFrequency = 3,
+                    TacticStart = DateTime.Parse("2020-01-01"),
+                    TacticEnd = DateTime.Parse("2020-04-01"),
+                    DoneOnDayOfWeeks = new List<DayOfWeek>(){ DayOfWeek.Sunday},
+                    IsImportant = true,
+                    TacticStrategy = StrategiesDb.GetStrategy(2)
                 }
             };
         }
@@ -92,6 +104,11 @@ namespace PolarisOneWeb.Data
         public IEnumerable<Tactic> GetTactics()
         {
             return TacticsDb;
+        }
+
+        public IEnumerable<Tactic> GetTacticsByDay(DayOfWeek dayOfWeek)
+        {
+            return TacticsDb.Where(t => t.DoneOnDayOfWeeks.Contains(dayOfWeek));
         }
 
         public bool UpdateTactic(Tactic tactic)

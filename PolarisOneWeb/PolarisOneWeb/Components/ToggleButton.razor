@@ -1,0 +1,17 @@
+﻿
+
+<button class="btn @(boolProp? "btn-primary" : "btn-outline-primary")" @onclick="(e => ToggleCheck(boolProp))">
+    @(boolProp ? textIfTrue : textIfFalse )
+</button>
+
+@code {
+    [Parameter] public bool boolProp { get; set; }
+    [Parameter] public string textIfFalse { get; set; }
+    [Parameter] public string textIfTrue { get; set; }
+    [Parameter] public EventCallback<bool> boolPropChanged { get; set; }
+
+    private void ToggleCheck(bool b)
+    {
+        boolProp = !b;
+    }
+}

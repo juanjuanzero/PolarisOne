@@ -12,5 +12,7 @@ namespace PolarisOneWeb.Data.DataInterfaces
         public Tactic GetTactic(int id);
         public bool UpdateTactic(Tactic tactic);
         public IEnumerable<Tactic> GetStrategyTactics(Strategy strategy);
+
+        public IEnumerable<Tactic> GetTacticsByDay(DayOfWeek dayOfWeek);
     }
 }

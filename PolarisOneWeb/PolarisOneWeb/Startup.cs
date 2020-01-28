@@ -31,6 +31,7 @@ namespace PolarisOneWeb
             services.AddServerSideBlazor();
             services.AddSingleton<ITacticData, InMemoryTactics>();
             services.AddSingleton<IStrategyData, InMemoryStrategy>();
+            services.AddSingleton<ICheckInData, InMemoryCheckIns>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

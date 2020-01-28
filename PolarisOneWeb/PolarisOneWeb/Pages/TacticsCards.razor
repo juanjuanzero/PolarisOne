@@ -8,27 +8,29 @@
 
 <div class="container">
     <h3>Tactics</h3>
-    <div class="card-columns">
+    <div>
         @if (TacticList == null || !TacticList.Any())
         {
             <span>Loading Tactics...</span>
         }
         else
         {
-            @foreach (var tactic in TacticList)
-            {
-                var a = string.Join(", ", tactic.DoneOnDayOfWeeks.Select(t => t.ToString()));
-                <BootstrapCard Title="@tactic.TacticCommit"
-                               SubTitle="@("Strategy: " + tactic.TacticStrategy.StrategyTitle)"
-                               Description="@tactic.TacticDescription"
-                               >
-                    <DetailFrag>
-                        <div><label>Executed On: </label> <span>@a</span></div>
-                        <div><label>Start: </label> <span>@tactic.TacticStart?.ToShortDateString()</span></div>
-                        <div><label>End: </label> <span>@tactic.TacticEnd?.ToShortDateString()</span></div>
-                    </DetailFrag>
-                </BootstrapCard>
-            }
+            <div class="card-columns">
+                @foreach (var tactic in TacticList)
+                {
+                    var a = string.Join(", ", tactic.DoneOnDayOfWeeks.Select(t => t.ToString()));
+                    <BootstrapCard Title="@tactic.TacticCommit"
+                                   SubTitle="@("Strategy: " + tactic.TacticStrategy.StrategyTitle)"
+                                   Description="@tactic.TacticDescription"
+                                   >
+                        <DetailFrag>
+                            <div><label>Executed On: </label> <span>@a</span></div>
+                            <div><label>Start: </label> <span>@tactic.TacticStart?.ToShortDateString()</span></div>
+                            <div><label>End: </label> <span>@tactic.TacticEnd?.ToShortDateString()</span></div>
+                        </DetailFrag>
+                    </BootstrapCard>
+                }
+            </div>
         }
     </div>
 </div>
@@ -38,7 +40,7 @@
 
     protected override async Task OnInitializedAsync()
     {
-        await Task.Delay(1000 * 10);
+        await Task.Delay(1000 * 2);
         TacticList = tacticDataService.GetTactics();
     }
 }

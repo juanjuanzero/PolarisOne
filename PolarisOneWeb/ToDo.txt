@@ -1,2 +1,8 @@
 ToDo
 - Create the weekly check in visual, should have wells and each tactic should be able to be displayed within the day of the week it should be there.
+- data saves should be something that is done without a submit button
+
+Lessons Learned Blazor
+- When editing components, build often
+- Naming things are not very good
+- the plan was not very well thought out, kept changing.
