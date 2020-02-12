@@ -50,7 +50,7 @@
                     <DetailFrag>
                         @foreach (var tactic in Tactics)
                         {
-                            <div class="btn btn-dark mb-1">@tactic.TacticCommit</div>
+                            <div @onclick="(() => AddCheck(tactic))" class="btn btn-dark mb-1">@tactic.TacticCommit</div>
                         }
                     </DetailFrag>
                 </BootstrapCard>
@@ -110,6 +110,16 @@
     public void CheckWasSelected(int id)
     {
         SelectedCheckIn = todaysChecks.FirstOrDefault(t => t.CheckId == id);
+    }
+
+    public void AddCheck(Tactic tactic)
+    {
+        var newCheck = new Check();
+        newCheck.CheckedTactic = tactic;
+        newCheck.CheckDate = DateTime.Now;
+        newCheck.IsChecked = true;
+
+        todaysChecks.Add(newCheck);
     }
 
     protected override void OnInitialized()
