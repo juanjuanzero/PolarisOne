@@ -14,7 +14,7 @@ namespace PolarisOneWeb.Data
         {
             this.StrategiesDb = new List<Strategy>()
             {
-                new Strategy()
+                new Strategy() 
                 {
                     StartegyId = 1,
                     StrategyTitle = "Creating an Application",
