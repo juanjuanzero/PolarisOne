@@ -30,7 +30,7 @@
                 <div class="card mb-2">
                     <div class="card-header">
                         <h4>@(DateTime.Now.DayOfWeek == dayOfWeek ? "Today" : dayOfWeek.ToString())</h4>
-                        <small>Current Date: @DateTime.Now.ToShortDateString()</small>
+                        <small>Date: @DateOfSunday.AddDays((int)dayOfWeek).ToShortDateString()</small>
                     </div>
                     <div class="card-body">
                         @foreach (var check in todaysChecks)
@@ -92,8 +92,7 @@
 
 @code {
 
-    //TODOs: paginate this page so that you can toggle between days.
-    //  make it so that the top header on the page stays on top
+    public DateTime DateOfSunday { get; set; }
 
     public Check SelectedCheckIn { get; set; }
     public DayOfWeek dayOfWeek { get; set; }
@@ -116,7 +115,7 @@
     {
         var newCheck = new Check();
         newCheck.CheckedTactic = tactic;
-        newCheck.CheckDate = DateTime.Now;
+        newCheck.CheckDate = DateOfSunday.AddDays((int)dayOfWeek);
         newCheck.IsChecked = true;
 
         todaysChecks.Add(newCheck);
@@ -129,5 +128,6 @@
         dayOfWeek = DateTime.Now.DayOfWeek;
         todaysChecks = checkInDataService.GetCheckInsByDayOfWeek(dayOfWeek).ToList();
         SelectedCheckIn = todaysChecks.FirstOrDefault();
+        DateOfSunday = DateTime.Now.AddDays(-1 * ((int)DateTime.Now.DayOfWeek));
     }
 }
